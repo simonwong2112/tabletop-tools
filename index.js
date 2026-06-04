@@ -7,6 +7,11 @@
  */
 function canCastSpell(isSpellPrepared, hasScroll) {
   // TODO
+  if (isSpellPrepared == false && hasScroll == false) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 /**
@@ -18,6 +23,11 @@ function canCastSpell(isSpellPrepared, hasScroll) {
  */
 function isHidden(hiding, aware) {
   // TODO
+  if (hiding == true || aware == false) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -29,6 +39,11 @@ function isHidden(hiding, aware) {
  */
 function doesStrikeHit(attack, ac) {
   // TODO
+  if (attack >= ac) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -40,6 +55,11 @@ function doesStrikeHit(attack, ac) {
  */
 function doesStrikeCrit(attack, ac) {
   // TODO
+  if (attack >= ac + 10) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -52,6 +72,12 @@ function doesStrikeCrit(attack, ac) {
  */
 function heal(maxHp, currentHp, healAmount) {
   // TODO
+  if (healAmount + currentHp > maxHp) {
+    healAmount = maxHp - currentHp;
+    return (currentHp = currentHp + healAmount);
+  } else {
+    return (currentHp = currentHp + healAmount);
+  }
 }
 
 /**
@@ -72,6 +98,19 @@ function heal(maxHp, currentHp, healAmount) {
  */
 function getProficiencyBonus(level, rank) {
   // TODO
+  if (rank == "untrained") {
+    return 0;
+  } else if (rank == "trained") {
+    return level + 2;
+  } else if (rank == "expert") {
+    return level + 4;
+  } else if (rank == "master") {
+    return level + 6;
+  } else if (rank == "legendary") {
+    return level + 8;
+  } else {
+    console.log("You are not proficient in this skill");
+  }
 }
 
 /**
@@ -86,6 +125,18 @@ function getProficiencyBonus(level, rank) {
  */
 function getCoverBonus(behindObstacle, takingCover) {
   // TODO
+  const partialCoverBonus = 2;
+  const fullCoverBonus = 4;
+  if (behindObstacle == false && takingCover == true) {
+    console.log("You can't take cover behind nothing");
+    return 0;
+  } else if (takingCover == true) {
+    return fullCoverBonus;
+  } else if (behindObstacle == true) {
+    return partialCoverBonus;
+  } else {
+    return 0;
+  }
 }
 
 /**
@@ -102,6 +153,13 @@ function getCoverBonus(behindObstacle, takingCover) {
  */
 function getRemainingHp(maxHp, currentHp, damage) {
   // TODO
+  if (damage >= maxHp * 2) {
+    return -1;
+  } else if (damage > currentHp) {
+    return 0;
+  } else {
+    return (currentHp = currentHp - damage);
+  }
 }
 
 /**
@@ -114,6 +172,21 @@ function getRemainingHp(maxHp, currentHp, damage) {
  */
 function canSee(light, vision) {
   // TODO
+  if (light == "bright") {
+    return true;
+  } else if (light == "dim") {
+    if (vision == "average") {
+      return false;
+    } else {
+      return true;
+    }
+  } else if (light == "dark") {
+    if (vision == "dark") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 /**
@@ -128,4 +201,11 @@ function canSee(light, vision) {
  */
 function getStrikeDamage(attack, ac, damage) {
   // TODO
+  if (doesStrikeCrit(attack, ac) == true) {
+    return (damage = damage * 2);
+  } else if (doesStrikeHit(attack, ac) == true) {
+    return damage;
+  } else if (doesStrikeHit(attack, ac) == false) {
+    return 0;
+  }
 }
